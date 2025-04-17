@@ -7,11 +7,11 @@
 
         <h2>Log In to Your Account</h2>
 
-        <label for="username">Username:</label>
+        <label for="name">name:</label>
         <input
             type="text"
-            name="username"
-            value="{{ old('username') }}"
+            name="name"
+            value="{{ old('name') }}"
             required
         >
 
