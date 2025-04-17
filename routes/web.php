@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NinjaController;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ Route::post('/ninjas', [NinjaController::class, 'store'])->name('ninjas.store');
 
 
 //Development routes
-Route::get('/register', [])->name('show.register');
-Route::get('/login', [])->name('show.login');
-Route::post('/register', [])->name('register');
-Route::post('/login', [])->name('login');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('show.register');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('show.login');
+Route::post('/login', [AuthController::class, 'login'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('login');

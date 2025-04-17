@@ -1,6 +1,6 @@
 <x-layout>
     <form
-        action=""
+        action=" {{ route('register') }}"
         method="POST"
     >
         @csrf
@@ -30,7 +30,7 @@
             required
         >
 
-        <label for="password_confirmation">Password:</label>
+        <label for="password_confirmation">Confirm Password:</label>
         <input
             type="password"
             name="password_confirmation"
@@ -50,6 +50,5 @@
                 @endforeach
             </ul>
         @endif
-
     </form>
 </x-layout>
