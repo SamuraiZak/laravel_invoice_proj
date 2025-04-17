@@ -15,12 +15,13 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        //remove this later pls
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
 
 
-        $this->call([DojoSeeder::class, NinjaSeeder::class,]);
+        $this->call([DojoSeeder::class, NinjaSeeder::class, FreelancerSeeder::class, ClientSeeder::class, ProjectSeeder::class, IncomeSeeder::class]);
     }
 }
