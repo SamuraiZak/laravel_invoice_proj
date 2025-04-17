@@ -20,6 +20,7 @@ Route::post('/ninjas', [NinjaController::class, 'store'])->name('ninjas.store');
 
 
 //Development routes
-
-Route::get('freelancer/dashboard', [FreelancerController::class, 'dashboard'])->name('freelancer.dashboard');
-
+Route::get('/register', [])->name('show.register');
+Route::get('/login', [])->name('show.login');
+Route::post('/register', [])->name('register');
+Route::post('/login', [])->name('login');
