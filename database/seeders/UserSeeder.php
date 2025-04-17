@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Freelancer;
 
-class FreelancerSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Freelancer::factory()->count(2)->create();
+        User::factory()->count(40)->create();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Freelancer;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +18,7 @@ class IncomeFactory extends Factory
     public function definition(): array
     {
         return [
-            'freelancer_id' => Freelancer::inRandomOrder()->first()->id,
+            'freelancer_id' => User::inRandomOrder()->first()->id,
             'income' => fake()->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
             'month' => fake()->dateTimeThisYear()->format('Y-m-d')
         ];

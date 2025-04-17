@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('freelancer_id')->constrained()->onDelete('cascade ');
+            $table->foreignId('freelancer_id')->constrained('users')->onDelete('cascade');
             $table->string('name')->nullable(false);
             $table->string('email')->nullable(false);
             $table->string('phone')->nullable(false);

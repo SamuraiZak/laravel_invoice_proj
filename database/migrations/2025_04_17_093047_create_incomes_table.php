@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('freelancer_id')->constrained()->onDelete('cascade ');
+            $table->foreignId('freelancer_id')->constrained('users')->onDelete('cascade');
             $table->double('income');
             $table->dateTime('month');
         });

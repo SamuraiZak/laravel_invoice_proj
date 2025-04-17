@@ -14,13 +14,13 @@ class Client extends Model
 
 
     //relationships
-    public function freelancer()
+    public function user()
     {
-        return $this->belongsTo(Freelancer::class);
+        return $this->belongsTo(User::class, 'freelancer_id');
     }
 
     public function project()
     {
-        return $this->hasMany(Project::class);
+        return $this->hasMany(Project::class, 'client_id');
     }
 }

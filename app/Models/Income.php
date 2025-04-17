@@ -13,8 +13,8 @@ class Income extends Model
     use HasFactory;
 
     //relationships
-    public function freelancer()
+    public function user()
     {
-        return $this->belongsTo(Freelancer::class);
+        return $this->belongsTo(User::class, 'freelancer_id');
     }
 }

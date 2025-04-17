@@ -45,4 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function client()
+    {
+        return $this->hasMany(Client::class, 'freelancer_id');
+    }
+
+    public function income()
+    {
+        return $this->hasMany(Income::class, 'freelancer_id');
+    }
 }

@@ -13,7 +13,8 @@ class Dojo extends Model
     /** @use HasFactory<\Database\Factories\DojoFactory> */
     use HasFactory;
 
-    public function ninjas(){
-        return $this->hasMany(Ninja::class);
+    public function ninjas()
+    {
+        return $this->hasMany(Ninja::class, 'dojo_id');
     }
 }
