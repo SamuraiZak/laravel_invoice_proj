@@ -30,7 +30,7 @@
                 @endguest
 
                 @auth
-                    <span class="border-r-2 border-emerald-200 pr-2">
+                    <span class="border-r-2 pr-2">
                         Hi there, {{ Auth::user()->name }}
                     </span>
                     <a href="{{ route('ninjas.create') }}">Create New Ninja</a>
