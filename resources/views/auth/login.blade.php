@@ -7,7 +7,7 @@
 
         <h2>Log In to Your Account</h2>
 
-        <label for="name">name:</label>
+        <label for="name">Name:</label>
         <input
             type="text"
             name="name"

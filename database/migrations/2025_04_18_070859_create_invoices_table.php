@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
+            $table->double('total');
+            $table->boolean('isPaid');
         });
     }
 
