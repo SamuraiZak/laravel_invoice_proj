@@ -9,24 +9,28 @@ use Illuminate\Http\Request;
 
 class NinjaController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $ninjas = Ninja::with('dojo')->orderBy('created_at', 'desc')->paginate(10);
-        
+
         return view('ninjas.index', ["ninjas" => $ninjas]);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $ninja = Ninja::with('dojo')->findOrFail($id);
         return view('ninjas.show', ["ninja" => $ninja]);
     }
 
-    public function create(){
+    public function create()
+    {
         $dojos = Dojo::all();
 
         return view('ninjas.create', ["dojos" => $dojos]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $validated = $request->validate([
             'name' => 'required | string | max:255',
             'skill' => 'required | integer | min:0 | max: 100',
@@ -34,12 +38,13 @@ class NinjaController extends Controller
             'dojo_id' => 'required | exists:dojos,id' //check id exist in dojo table
         ]);
 
-        Ninja::create($validated);
+        $ninja = Ninja::create($validated);
 
-        return redirect()->route('ninjas.index');
-    }
+        // return redirect()->route('ninjas.index');
 
+        // return redirect()->route('ninjas.index')->with('submitted_ninja', $ninja);
 
-
+        return response()->json($ninja);
+}
 
 }

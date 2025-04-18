@@ -49,7 +49,10 @@
                 selected
             >Select a dojo</option>
             @foreach ($dojos as $dojo)
-                <option value="{{ $dojo->id }}" {{ $dojo->id == old('dojo_id') ? 'selected' : ''}}>{{ $dojo->name }}</option>
+                <option
+                    value="{{ $dojo->id }}"
+                    {{ $dojo->id == old('dojo_id') ? 'selected' : '' }}
+                >{{ $dojo->name }}</option>
             @endforeach
         </select>
 
