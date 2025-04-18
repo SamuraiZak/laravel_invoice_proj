@@ -34,25 +34,22 @@ class AuthController extends Controller
         return redirect()->route('ninjas.index');
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:8'
         ]);
 
-       if(Auth::attempt($validated)){
+        if (Auth::attempt($validated)) {
             $request->session()->regenerate();
 
-            return redirect()->route('ninjas.index');
-       }
+            return redirect()->route('show.dashboard');
+        }
 
-       throw ValidationException::withMessages([
+        throw ValidationException::withMessages([
             'credentials' => 'Sorry, incorrect credentials'
-       ]);
-
-
-
-
+        ]);
     }
 
     public function logout(Request $request)

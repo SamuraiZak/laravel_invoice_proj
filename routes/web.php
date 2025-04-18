@@ -8,10 +8,9 @@ use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\UserController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 // Tutorial routes
 Route::get('ninjas/', [NinjaController::class, 'index'])->name('ninjas.index');
@@ -33,10 +32,13 @@ Route::post('/ninjas', [NinjaController::class, 'store'])->name('ninjas.store');
 
 
 
-
-Route::get('/login', [AuthController::class, 'showLogin'])->name('show.login');
+//auth stuff
+Route::get('/', [AuthController::class, 'showLogin'])->name('show.login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
-
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+//Dashboard
+Route::get('/dashboard', [UserController::class, 'index'])->name('show.dashboard');

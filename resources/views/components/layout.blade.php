@@ -15,7 +15,7 @@
 
         <header>
             <nav>
-                <h1>Ninja Network</h1>
+                <h1>$tonks</h1>
                 {{-- <a href="{{ route('ninjas.index') }}">All Ninjas</a> --}}
 
                 @guest
