@@ -17,4 +17,8 @@ class Project extends Model
     {
         return $this->belongsTo(Client::class, 'client_id');
     }
+
+    public function invoice(){
+        return $this->hasMany(Invoice::class, 'project_id');
+    }
 }
