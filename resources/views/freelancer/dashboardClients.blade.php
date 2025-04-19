@@ -34,20 +34,33 @@
             open: false,
             errors: @js($errors->all()),
             show() {
-                console.log(this.errors.length)
+                if (@js($errors->all()).length > 0) { this.errors = @js($errors->all()) };
                 this.open = true;
+                console.log(this.errors)
             },
             cancel() {
                 console.log(this.errors.length)
                 this.open = false;
                 this.errors = [];
             },
-            submitAttempt(event) {
+            loadErrors() {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                this.errors = @js($errors->all());
+                console.log('Errors loaded:', this.errors);
+                resolve();  
+            }, 100)
+                });
+            },
+            async submitAttempt(event) {
+                await this.loadErrors();
                 console.log(this.errors.length);
                 if (this.errors.length > 0) {
+                    event.preventDefault();
                     this.open = true
+                    console.log('Form blocked due to errors')
                 } else {
-                    this.open = false;
+                    event.target.closest('form').submit()
                 }
             }
         }">
@@ -71,6 +84,7 @@
                     <form
                         action="{{ route('store.client') }}"
                         method="POST"
+                        @submit.prevent="submitAttempt($event)"
                     >
                         @csrf
 
@@ -146,7 +160,6 @@
                             <button
                                 type="submit"
                                 class="mt-6 bg-gray-100 text-black px-4 py-2 rounded hover:bg-green-500"
-                                @click="submitAttempt()"
                             >
                                 Save
                             </button>
