@@ -6,20 +6,21 @@
     </div>
     <div class="container mx-auto px-4 py-8">
 
-        <div class="flex flex-row gap-x-12">
+        <div class="flex flex-row gap-x-12 justify-between">
 
-            <div class="bg-white p-6 rounded shadow group hover:bg-green-300">
-                <h2 class="text-lg font-semibold text-gray-700 group-hover:text-white">Clients</h2>
+            <div class="flex-1 bg-white p-6 rounded shadow border-b-4 border-lime-500 group hover:bg-green-300">
+                <h2 class="text-lg text-center font-semibold text-gray-700 group-hover:text-white">Clients</h2>
                 <p class="text-2xl text-center text-blue-500 mt-2 group-hover:text-white">50</p>
             </div>
 
-            <div class="bg-white p-6 rounded shadow group hover:bg-green-300">
-                <h2 class="text-lg font-semibold text-gray-700 group-hover:text-white">Projects</h2>
+            <div class="flex-1 bg-white p-6 rounded shadow border-b-4 border-lime-500 group hover:bg-green-300">
+                <h2 class="text-lg text-center font-semibold text-gray-700 group-hover:text-white">Projects</h2>
                 <p class="text-2xl text-center text-purple-500 mt-2 group-hover:text-white">30</p>
             </div>
 
-            <div class="bg-white p-6 rounded shadow group hover:bg-green-300">
-                <h2 class="text-lg font-semibold text-gray-700 group-hover:text-white">Outstanding Invoices</h2>
+            <div class="flex-1 bg-white p-6 rounded shadow border-b-4 border-lime-500 group hover:bg-green-300">
+                <h2 class="text-lg text-center font-semibold text-gray-700 group-hover:text-white">Outstanding Invoices
+                </h2>
                 <p class="text-2xl text-center text-red-500 mt-2 group-hover:text-white">12</p>
             </div>
         </div>
@@ -30,7 +31,7 @@
     <ul>
         @foreach ($clients as $client)
             <li>
-                <x-card href="">
+                <x-card href="{{ route('show.client', $client->id) }}">
                     <div>
                         <h3>{{ $client->name }}</h3>
                         <p>{{ $client->company }}</p>

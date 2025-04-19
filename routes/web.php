@@ -42,3 +42,4 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //Dashboard
 Route::get('/dashboard', [UserController::class, 'index'])->name('show.dashboard');
+Route::get('client/{id}', [ClientController::class, 'showClient'])->name('show.client');

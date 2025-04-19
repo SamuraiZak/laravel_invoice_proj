@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         $clients = Client::where('freelancer_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('freelancer.dashboard', ["clients" => $clients]);
+        return view('freelancer.dashboardClients', ["clients" => $clients]);
 
 
 
