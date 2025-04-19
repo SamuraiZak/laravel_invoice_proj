@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
 
-    protected $fillable = ['client_id', 'name', 'description', 'rate/hour', 'total hours'];
+    protected $fillable = ['client_id', 'name', 'description', 'rate_per_hour', 'total_hours'];
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
 
@@ -18,7 +18,8 @@ class Project extends Model
         return $this->belongsTo(Client::class, 'client_id');
     }
 
-    public function invoice(){
+    public function invoice()
+    {
         return $this->hasMany(Invoice::class, 'project_id');
     }
 }

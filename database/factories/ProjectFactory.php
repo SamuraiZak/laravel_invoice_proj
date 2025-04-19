@@ -21,7 +21,7 @@ class ProjectFactory extends Factory
             'client_id' => Client::inRandomOrder()->first()->id,
             'name' => fake()->name,
             'description' => fake()->realText(100),
-            'rate/hour' => fake()->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
+            'rate_per_hour' => fake()->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 100),
             'total_hours' => fake()->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000)
         ];
     }

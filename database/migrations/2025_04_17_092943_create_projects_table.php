@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->string('name');
             $table->string('description');
-            $table->double('rate/hour');
+            $table->double('rate_per_hour');
             $table->double('total_hours');
         });
     }
