@@ -50,3 +50,11 @@ Route::get('client/{id}', [ClientController::class, 'showClient'])->name('show.c
 
 //Project
 Route::get('project/{id}', [ProjectController::class, 'showProject'])->name('show.project');
+
+
+
+
+//try out the modal
+Route::get('modal', function(){
+    return view('test.modal');
+})->name('modal');
