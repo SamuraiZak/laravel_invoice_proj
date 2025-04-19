@@ -28,37 +28,135 @@
 
     <div class="flex justify-between mt-10">
         <h2>All Clients</h2>
-        <div x-data="{ open: false }">
-            <!-- Trigger Button -->
+
+        <!-- Modal Shenanigans -->
+        <div x-data="{
+            open: false,
+            errors: @js($errors->all()),
+            show() {
+                console.log(this.errors.length)
+                this.open = true;
+            },
+            cancel() {
+                console.log(this.errors.length)
+                this.open = false;
+                this.errors = [];
+            },
+            submitAttempt(event) {
+                console.log(this.errors.length);
+                if (this.errors.length > 0) {
+                    this.open = true
+                } else {
+                    this.open = false;
+                }
+            }
+        }">
             <button
                 class="bg-green-500 text-white px-4 py-2 rounded hover:bg-blue-400 hover:text-black"
-                @click="open = true"
+                @click="show()"
             >
                 Add New Client
             </button>
 
-            <!-- Modal -->
             <div
                 x-show="open"
                 x-transition
                 class="fixed inset-0 bg-black/50 flex justify-center items-center z-50"
             >
                 <div
-                    {{-- @click.away="open = false" --}}
-                    class="bg-white p-6 rounded shadow-lg w-[90%] md:w-[30%] relative"
+                    id="modal-form"
+                    class="bg-white p-6 rounded-b-lg border-4 shadow-lg w-[90%] md:w-[30%] relative border-green-500 overflow-y-auto h-[90%]"
                 >
-                    <h2 class="text-xl font-bold mb-4">Modal Title</h2>
-                    <p>This is the content of the modal.</p>
-
-                    <button
-                        class="mt-6 bg-red-500 text-white px-4 py-2 rounded"
-                        @click="open = false"
+                    <h2 class="text-xl font-bold mb-4">Please fill in client data</h2>
+                    <form
+                        action="{{ route('store.client') }}"
+                        method="POST"
                     >
-                        Close
-                    </button>
+                        @csrf
+
+                        <label for="name">Name:</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value="{{ old('name') }}"
+                            required
+                        >
+
+                        <label for="email">Email:</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ old('email') }}"
+                            required
+                        >
+
+                        <label for="phone">Contact Number:</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            value="{{ old('phone') }}"
+                            required
+                        >
+
+                        <label for="company">Company:</label>
+                        <input
+                            type="text"
+                            id="company"
+                            name="company"
+                            value="{{ old('company') }}"
+                            required
+                        >
+
+                        <label for="address">Address:</label>
+                        <textarea
+                            rows="5"
+                            id="address"
+                            name="address"
+                            required
+                        >{{ old('address') }}</textarea>
+
+                        <ul
+                            x-show="errors.length > 0"
+                            class="px-4 py-2 bg-red-100"
+                        >
+                            <template
+                                x-for="(error, index) in errors"
+                                :key="index"
+                            >
+                                <li
+                                    class="my-2 text-red-500"
+                                    x-text="error"
+                                ></li>
+                            </template>
+                        </ul>
+
+                        <div></div>
+
+                        <div class="flex justify-between">
+                            <button
+                                type="button"
+                                class="mt-6 bg-gray-100 text-black px-4 py-2 rounded hover:bg-red-500"
+                                @click="cancel()"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                class="mt-6 bg-gray-100 text-black px-4 py-2 rounded hover:bg-green-500"
+                                @click="submitAttempt()"
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+        <!--Modal Shenanigans End -->
+
     </div>
 
     <ul>

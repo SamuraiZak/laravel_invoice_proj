@@ -40,15 +40,16 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-//Dashboard
+//========= Dashboard
 Route::get('/dashboard', [UserController::class, 'index'])->name('show.dashboard');
+Route::post('/client', [UserController::class, 'addClient'])->name('store.client');
 
 
-//Client
+//========= Client
 Route::get('client/{id}', [ClientController::class, 'showClient'])->name('show.client');
 
 
-//Project
+//========= Project
 Route::get('project/{id}', [ProjectController::class, 'showProject'])->name('show.project');
 
 

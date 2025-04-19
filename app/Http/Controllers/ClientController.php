@@ -8,7 +8,7 @@ use App\Models\Client;
 class ClientController extends Controller
 {
 
-    //function to show client on click from list
+    //Show Client Detaail
     public function showClient($id){
         $client = Client::with('project')->findOrFail($id);
 
@@ -18,7 +18,10 @@ class ClientController extends Controller
 
     }
 
+    //When click on view project detail
     public function showProject($id){
 
     }
+
+    
 }
