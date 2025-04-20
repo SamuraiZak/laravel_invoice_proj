@@ -32,35 +32,42 @@
         <!-- Modal Shenanigans -->
         <div x-data="{
             open: false,
-            errors: @js($errors->all()),
+            errors: [],
             show() {
-                if (@js($errors->all()).length > 0) { this.errors = @js($errors->all()) };
+                if (@js($errors->all()).length > 0) {
+                    this.errors = @js($errors->all());
+                }
                 this.open = true;
-                console.log(this.errors)
+                console.log(this.errors);
             },
             cancel() {
-                console.log(this.errors.length)
+                console.log(this.errors.length);
                 this.open = false;
                 this.errors = [];
             },
-            loadErrors() {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                this.errors = @js($errors->all());
-                console.log('Errors loaded:', this.errors);
-                resolve();  
-            }, 100)
-                });
-            },
             async submitAttempt(event) {
-                await this.loadErrors();
-                console.log(this.errors.length);
-                if (this.errors.length > 0) {
-                    event.preventDefault();
-                    this.open = true
-                    console.log('Form blocked due to errors')
-                } else {
-                    event.target.closest('form').submit()
+                event.preventDefault();
+                try {
+                    const response = await fetch('{{ route('store.client') }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: new FormData(event.target)
+                    });
+        
+                    if (response.ok) {
+                        this.open = false;
+                        console.log('Form submitted successfully');
+                        window.location.reload();
+                    } else {
+                        const data = await response.json();
+                        this.errors = data.errors || [];
+                        this.open = true;
+                        console.log('Form blocked due to errors');
+                    }
+                } catch (error) {
+                    console.error('Network error', error);
                 }
             }
         }">
