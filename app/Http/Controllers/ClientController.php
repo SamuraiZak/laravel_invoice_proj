@@ -10,13 +10,13 @@ class ClientController extends Controller
 {
 
     //Show Client Detail
-    public function showClient($id)
+    public function showClient(Client $client)
     {
-        $client = Client::with('project')->findOrFail($id);
+        $client ->load('project');
 
         // echo $client->project;   turn this to json to see in terminal pls
 
-        return view('client.showClient', ["client" => $client, "projects" => $client->project]);
+        return view('client.showClient', ["client" => $client]);
     }
 
     //When click Add New Client button
@@ -41,5 +41,22 @@ class ClientController extends Controller
         Client::create($validated);
 
         return redirect()->route('show.dashboard');
+    }
+
+
+    public function edit(Client $client)
+    {
+        $editing = true;
+
+        return view('client.showClient', compact('client', 'editing'));
+    }
+
+
+    public function update(Client $client, Request $request){
+        $validated = $request()->validate([]);
+
+        $client->update($validated);
+
+        return redirect()->route('client.showClient', ["client" => $client]);
     }
 }

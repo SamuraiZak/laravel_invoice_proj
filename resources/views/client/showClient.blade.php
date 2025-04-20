@@ -14,6 +14,7 @@
         <div class="flex flex-row justify-between">
             <h3>Client Information</h3>
              <button class="btn-green mt-4">Edit </button>
+             <a href=""></a>
         </div>
 
         <p><strong>Email: </strong>{{ $client->email }}</p>
@@ -25,7 +26,7 @@
     <h2>Ongoing Projects</h2>
 
     <ul>
-        @foreach ($projects as $project)
+        @foreach ($client->project as $project)
             <li>
                 <x-card href="{{ route('show.project', $project->id) }}">
                     <div>
