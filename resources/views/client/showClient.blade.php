@@ -28,10 +28,10 @@
                                     class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                 >Delete</button>
 
-                                    <a
-                                        href="{{ route('show.client', $client) }}"
-                                        class="inline-flex items-center justify-center px-4 py-2 rounded bg-gray-500 text-white border-2 border-gray-500 hover:bg-green-100 hover:text-black"
-                                    >Cancel</a>
+                                <a
+                                    href="{{ route('show.client', $client) }}"
+                                    class="inline-flex items-center justify-center px-4 py-2 rounded bg-gray-500 text-white border-2 border-gray-500 hover:bg-green-100 hover:text-black"
+                                >Cancel</a>
                             </div>
                     </div>
                 </form>
@@ -40,6 +40,7 @@
         @endif
     </div>
 
+    {{-- When Editing Data --}}
     @if ($editing ?? false)
 
         <div class="border-2 border-dashed bg-white px-4 pb-4 my-4 rounded">
@@ -153,11 +154,77 @@
 
     <div class="flex justify-between pt-10">
         <h2>Ongoing Projects</h2>
-        <button
-            class="border-2 border-y-gray-600  rounded px-3 py-2 bg-green-200 hover:bg-green-500 hover:text-black;">Add
-            a
-            project</button>
+        <a
+            href="{{ route('create.project', $client) }}"
+            class="inline-flex items-center justify-center px-4 py-2 rounded bg-green-500 text-white border-2 border-green-800 hover:bg-green-800 hover:text-black"
+        >Add a Project</a>
     </div>
+
+    {{-- When adding project --}}
+    @if ($addingProject ?? false)
+        <div class="fixed inset-0 bg-black/50 flex justify-center place-items-start z-50">
+            <form
+                action="{{ route('store.project', ['client' => $client]) }}"
+                method="POST"
+            >
+                @csrf
+                <div class="rounded-lg border border-black bg-white p-4  mt-10 w-3xl max-h-180 overflow-y-auto">
+                    <h2 class="text-black">Add Project Data</h1>
+                        <label for="name">Name:</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value="{{ old('name') }}"
+                            required
+                        >
+
+                        <label for="rate_per_hour">Rate/hour:</label>
+                        <input
+                            type="number"
+                            id="rate_per_hour"
+                            name="rate_per_hour"
+                            step=".01"
+                            value="{{ old('rate_per_hour') }}"
+                            required
+                        >
+
+                        <label for="description">Description:</label>
+                        <textarea
+                            rows="5"
+                            id="description"
+                            name="description"
+                            required
+                        >{{ old('description') }}</textarea>
+
+                        {{-- Sticky at the bottom errors and buttons --}}
+                        <div class="sticky bottom-0 bg-white border-t-8 border-black ">
+                            @if ($errors->any())
+                                <ul class="px-4 py2 bg-red-100">
+                                    @foreach ($errors->all() as $error)
+                                        <li class="my-2 text-red-500">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+
+                            <div class="flex justify-around pt-5">
+                                <button
+                                    type="submit"
+                                    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                >Save</button>
+
+                                <a
+                                    href="{{ route('show.client', $client) }}"
+                                    class="inline-flex items-center justify-center px-4 py-2 rounded bg-gray-500 text-white border-2 border-gray-500 hover:bg-green-100 hover:text-black"
+                                >Cancel</a>
+                            </div>
+                        </div>
+
+                </div>
+            </form>
+        </div>
+    @else
+    @endif
 
     <ul>
         @foreach ($client->project as $project)

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->double('rate_per_hour');
-            $table->double('total_hours');
+            $table->double('total_hours')->default(0);
         });
     }
 

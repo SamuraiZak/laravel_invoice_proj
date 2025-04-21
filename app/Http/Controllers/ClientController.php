@@ -12,7 +12,9 @@ class ClientController extends Controller
     //Show Client Detail
     public function showClient(Client $client)
     {
-        $client->load('project');
+        $client->load(['project' => function ($projQuery) {
+            $projQuery->orderBy('created_at', 'desc');
+        }]);
 
         // echo $client->project;   turn this to json to see in terminal pls
 
@@ -75,7 +77,8 @@ class ClientController extends Controller
     }
 
 
-    public function destroy(Client $client) {
+    public function destroy(Client $client)
+    {
         $client->delete();
 
         return redirect()->route('show.dashboard');

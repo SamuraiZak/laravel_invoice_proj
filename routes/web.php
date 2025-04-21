@@ -58,12 +58,13 @@ Route::delete('client/{client}', [ClientController::class, 'destroy'])->name('de
 
 
 //========= Project
+Route::post('/project/{client}', [ProjectController::class, 'store'])->name('store.project');
+Route::get('project/{client}/create', [ProjectController::class, 'add'])->name('create.project');
 Route::get('project/{id}', [ProjectController::class, 'showProject'])->name('show.project');
 
 
 
-
 //try out the modal
-Route::get('modal', function(){
+Route::get('modal', function () {
     return view('test.modal');
 })->name('modal');
