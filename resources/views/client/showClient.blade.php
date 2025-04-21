@@ -49,7 +49,7 @@
                 method="POST"
                 class="flex flex-row justify-between relative px-4 pt-20"
             >
-                @method('put')
+                @method('PUT')
                 @csrf
                 <div class="w-3/4">
 

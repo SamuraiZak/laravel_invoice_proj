@@ -41,7 +41,12 @@ class ProjectController extends Controller
 
     public function update(Project $project, Request $request)
     {
-        $validated = $request->validate([]);
+        $validated = $request->validate([
+            "name" => "required|string|max:255|unique:projects,name,{$project->id}",
+            "description" => "required|string|max:500",
+            "rate_per_hour" => "required|numeric|regex:/^\d+(\.\d{1,2})?$/",
+            "total_hours" => "numeric|regex:/^\d+(\.\d{1,2})?$/"
+        ]);
 
         $project->update($validated);
         $project->save();

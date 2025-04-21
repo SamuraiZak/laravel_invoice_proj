@@ -63,6 +63,8 @@ Route::get('project/{client}/create', [ProjectController::class, 'add'])->name('
 Route::get('project/{project}', [ProjectController::class, 'showProject'])->name('show.project');
 Route::get('project/{project}/delete', [ProjectController::class, 'delete'])->name('delete.project');
 Route::delete('project/{project}', [ProjectController::class, 'destroy'])->name('destroy.project');
+Route::get('project/{project}/edit', [ProjectController::class, 'edit'])->name('edit.project');
+Route::put('project/{project}', [ProjectController::class, 'update'])->name('update.project');
 
 
 //try out the modal
