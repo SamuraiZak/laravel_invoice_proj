@@ -28,9 +28,9 @@ class InvoiceController extends Controller
 
     public function delete(Invoice $invoice)
     {
-        // $deletingInvoice = true;
+        $deletingInvoice = true;
         $project = $invoice->project;
-        return view('invoice.deleteInvoice', compact('invoice', 'project'));
+        return view('project.showProject', compact('invoice', 'project', 'deletingInvoice'));
     }
 
     public function destroy(Invoice $invoice)
@@ -43,9 +43,19 @@ class InvoiceController extends Controller
     }
 
 
-    public function markPaidInvoice(Invoice $invoice) {
+    public function markAsPaid(Invoice $invoice) {
+        $invoice->isPaid=true;
+        $invoice->save();
+        $project = $invoice->project;
 
+        return redirect()->route('show.project', ["project" => $project]);
     }
 
-    public function makeUnpaidInvoice() {}
+    public function markAsUnpaid(Invoice $invoice) {
+        $invoice->isPaid = false;
+        $invoice->save();
+        $project = $invoice->project;
+
+        return redirect()->route('show.project', ["project" => $project]);
+    }
 }
