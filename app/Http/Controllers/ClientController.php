@@ -12,7 +12,7 @@ class ClientController extends Controller
     //Show Client Detail
     public function showClient(Client $client)
     {
-        $client ->load('project');
+        $client->load('project');
 
         // echo $client->project;   turn this to json to see in terminal pls
 
@@ -52,11 +52,24 @@ class ClientController extends Controller
     }
 
 
-    public function update(Client $client, Request $request){
-        $validated = $request()->validate([]);
+    public function update(Client $client, Request $request)
+    {
+        $validated = $request->validate([
+            "email" => "required|email|max:255|unique:clients,email",
+            "phone" => "required|string|min:8|max:20",
+            "company" => "nullable|string|max:255",
+            "address" => "nullable|string|max:500"
+        ]);
 
         $client->update($validated);
+        $client->save();
 
-        return redirect()->route('client.showClient', ["client" => $client]);
+        return redirect()->route('show.client', ["client" => $client]);
+    }
+
+
+
+    public function destroy(Client $client){
+        $deleting = true;
     }
 }

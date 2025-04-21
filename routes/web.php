@@ -50,7 +50,8 @@ Route::post('/client', [UserController::class, 'addClient'])->name('store.client
 //========= Client
 Route::get('client/create', [ClientController::class, 'showAddClient'])->name('create.client');
 Route::post('/client', [ClientController::class, 'addClient'])->name('store.client');
-Route::get('client/{id}/edit', [ClientController::class, 'edit'])->name('edit.client');
+Route::get('client/{client}/edit', [ClientController::class, 'edit'])->name('edit.client');
+Route::put('client/{client}', [ClientController::class, 'update'])->name('update.client');
 Route::get('client/{client}', [ClientController::class, 'showClient'])->name('show.client');
 
 
