@@ -5,11 +5,39 @@
 
         @if ($editing ?? false)
         @else
-            <div class="flex gap-x-8">
-                <button class="btn">Delete Client</button>
-            </div>
+            <a
+                href="{{ route('delete.client', $client) }}"
+                class="inline-flex items-center justify-center px-4 py-2 rounded bg-red-500 text-white border-2 border-red-500 hover:bg-red-100 hover:text-black"
+            >Delete Client</a>
         @endif
 
+        {{-- Popup to ask sure delete or not --}}
+        @if ($deleting ?? false)
+            <div class="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+                <form
+                    action="{{ route('destroy.client', $client) }}"
+                    method="POST"
+                >
+                    @csrf
+                    @method('DELETE')
+                    <div class="rounded-lg border border-black bg-white p-4 h-1/4 pt-10">
+                        <h2 class="text-black">Are you sure you want to delete this Client?</h1>
+                            <div class="flex justify-around pt-5">
+                                <button
+                                    type="submit"
+                                    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                >Delete</button>
+
+                                    <a
+                                        href="{{ route('show.client', $client) }}"
+                                        class="inline-flex items-center justify-center px-4 py-2 rounded bg-gray-500 text-white border-2 border-gray-500 hover:bg-green-100 hover:text-black"
+                                    >Cancel</a>
+                            </div>
+                    </div>
+                </form>
+
+            </div>
+        @endif
     </div>
 
     @if ($editing ?? false)
@@ -99,7 +127,10 @@
                     >
                         Save
                     </button>
-                    <a href="{{ route('show.client', $client->id) }}" class="inline-flex items-center justify-center px-4 py-2 rounded bg-red-500 text-white border-2 border-red-500 hover:bg-red-100 hover:text-black">Cancel</a>
+                    <a
+                        href="{{ route('show.client', $client->id) }}"
+                        class="inline-flex items-center justify-center px-4 py-2 rounded bg-red-500 text-white border-2 border-red-500 hover:bg-red-100 hover:text-black"
+                    >Cancel</a>
                 </div>
             </form>
         </div>
@@ -119,9 +150,6 @@
             <p><strong>Address: </strong>{{ $client->address }}</p>
         </div>
     @endif
-
-
-    
 
     <div class="flex justify-between pt-10">
         <h2>Ongoing Projects</h2>

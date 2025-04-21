@@ -68,8 +68,16 @@ class ClientController extends Controller
     }
 
 
-
-    public function destroy(Client $client){
+    public function delete(Client $client)
+    {
         $deleting = true;
+        return view('client.showClient', compact('client', 'deleting'));
+    }
+
+
+    public function destroy(Client $client) {
+        $client->delete();
+
+        return redirect()->route('show.dashboard');
     }
 }
