@@ -82,7 +82,7 @@
                             class="w-32"
                         >Contact Number:</label>
                         <input
-                            type="number"
+                            type="tel"
                             id="phone"
                             name="phone"
                             value="{{ $client->phone }}"

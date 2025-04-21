@@ -57,8 +57,8 @@ class ClientController extends Controller
     public function update(Client $client, Request $request)
     {
         $validated = $request->validate([
-            "email" => "required|email|max:255|unique:clients,email",
-            "phone" => "required|string|min:8|max:20",
+            "email" => "required|email|max:255|unique:clients,email,{$client->id}",
+            "phone" => "required|string|min:8|max:20|regex:/^\+?[0-9]{8,20}$/",
             "company" => "nullable|string|max:255",
             "address" => "nullable|string|max:500"
         ]);

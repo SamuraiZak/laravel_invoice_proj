@@ -8,10 +8,8 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function showProject($id)
+    public function showProject(Project $project)
     {
-        $project = Project::findOrFail($id);
-
         return view('project.showProject', ["project" => $project]);
     }
 
@@ -29,7 +27,41 @@ class ProjectController extends Controller
             "rate_per_hour" => "required|numeric|regex:/^\d+(\.\d{1,2})?$/",
         ]);
 
-       $client->project()->create($validated);
+        $client->project()->create($validated);
+
+        return redirect()->route('show.client', ["client" => $client]);
+    }
+
+    // Editing stuff
+    public function edit(Project $project)
+    {
+        $editing = true;
+        return view('project.showProject', compact('project', 'editing'));
+    }
+
+    public function update(Project $project, Request $request)
+    {
+        $validated = $request->validate([]);
+
+        $project->update($validated);
+        $project->save();
+
+        return redirect()->route('show.project', ["project" => $project]);
+    }
+
+
+    // Deleting stuff
+    public function delete(Project $project)
+    {
+        $deleting = true;
+        return view('project.showProject', compact('project', 'deleting'));
+    }
+
+    public function destroy(Project $project)
+    {
+        $project->delete();
+
+        $client = $project->client;
 
         return redirect()->route('show.client', ["client" => $client]);
     }
