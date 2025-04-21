@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
             $table->double('total');
-            $table->boolean('isPaid');
+            $table->boolean('isPaid')->default(false);
         });
     }
 

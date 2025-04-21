@@ -9,6 +9,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InvoiceController;
 
 
 
@@ -66,6 +67,14 @@ Route::delete('project/{project}', [ProjectController::class, 'destroy'])->name(
 Route::get('project/{project}/edit', [ProjectController::class, 'edit'])->name('edit.project');
 Route::put('project/{project}', [ProjectController::class, 'update'])->name('update.project');
 
+
+//===== Invoice
+Route::get('invoice/{project}/create', [InvoiceController::class, 'add'])->name('create.invoice');
+Route::post('/invoice/{project}', [InvoiceController::class, 'store'])->name('store.invoice');
+Route::get('invoice/{invoice}/delete', [InvoiceController::class, 'delete'])->name('delete.invoice');
+Route::delete('invoice/{invoice}', [InvoiceController::class, 'destroy'])->name('destroy.invoice');
+Route::put('invoice/{invoice}/markAsPaid', [InvoiceController::class, 'markAsPaid'])->name('markAsPaid.invoice');
+Route::put('invoice/{invoice}/markAsUnpaid', [InvoiceController::class, 'markAsUnpaid'])->name('markAsUnpaid.invoice');
 
 //try out the modal
 Route::get('modal', function () {

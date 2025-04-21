@@ -10,6 +10,10 @@ class ProjectController extends Controller
 {
     public function showProject(Project $project)
     {
+        $project->load(['invoice' => function ($invoiceQuery) {
+            $invoiceQuery->orderBy('created_at', 'desc');
+        }]);
+
         return view('project.showProject', ["project" => $project]);
     }
 
@@ -64,9 +68,10 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        $project->delete();
-
         $client = $project->client;
+
+
+        $project->delete();
 
         return redirect()->route('show.client', ["client" => $client]);
     }
