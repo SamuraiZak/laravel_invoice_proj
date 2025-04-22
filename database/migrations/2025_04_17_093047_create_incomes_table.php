@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('freelancer_id')->constrained('users')->onDelete('cascade');
             $table->double('income');
-            $table->dateTime('month');
+            $table->string('year_month');
         });
     }
 

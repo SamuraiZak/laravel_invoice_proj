@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Income extends Model
 {
-    protected $fillable = ['freelancer_id', 'income', 'month'];
+    protected $fillable = ['freelancer_id', 'income', 'year_month'];
 
     /** @use HasFactory<\Database\Factories\IncomeFactory> */
     use HasFactory;
