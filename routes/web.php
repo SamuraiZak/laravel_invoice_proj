@@ -84,6 +84,7 @@ Route::put('invoice/{invoice}/markAsPaid', [InvoiceController::class, 'markAsPai
 Route::put('invoice/{invoice}/markAsUnpaid', [InvoiceController::class, 'markAsUnpaid'])->name('markAsUnpaid.invoice');
 
 
+//download pdf
 Route::get('generate-pdf/{invoice}', [PdfController::class, 'generatePdf'])->name('invoice_download');
 
 //try out the modal

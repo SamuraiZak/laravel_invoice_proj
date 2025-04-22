@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InvoiceCreated;
 
 
 class InvoiceController extends Controller
@@ -27,7 +29,10 @@ class InvoiceController extends Controller
 
         $validated = $request->validate(["hours" => "required|numeric|regex:/^\d+(\.\d{1,2})?$/"]);
 
-        $project->invoice()->create(array_merge($validated,[ "total" => $total]));
+        $invoice = $project->invoice()->create(array_merge($validated, ["total" => $total]));
+
+
+        Mail::to($project->client->email)->send(new InvoiceCreated($invoice));
 
         return redirect()->route('show.project', ["project" => $project]);
     }

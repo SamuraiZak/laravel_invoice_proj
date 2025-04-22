@@ -18,7 +18,7 @@ class PdfController extends Controller
             'hourly_rate' => $invoice->project->rate_per_hour,
             'total_hours' => $invoice->hours,
             'total' => $invoice->total
-        ]; //Insert data from invoice here
+        ]; 
         $pdf = Pdf::loadView('templatePDF.invoicePDF', $data);
         return $pdf->download('invoice.pdf');
     }
