@@ -32,7 +32,34 @@ class InvoiceController extends Controller
         $invoice = $project->invoice()->create(array_merge($validated, ["total" => $total]));
 
 
+
+
+
+
         Mail::to($project->client->email)->send(new InvoiceCreated($invoice));
+        // try {
+        //     $project->load('client');
+        //     $data = [
+        //         'clientName' => $project->client->name,
+        //         'project_name' => $project->name,
+        //         'hourly_rate' => $project->rate_per_hour,
+        //         'total_hours' => $invoice->hours,
+        //         'total' => $invoice->total,
+        //     ];
+
+        //     // Send the email directly without using a Mailable
+        //     Mail::send('emails.email', $data, function ($message) use ($project) {
+        //         $message->to($project->client->email)
+        //             ->subject('Invoice Issued')
+        //             ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+        //     });
+
+        //     // Log success
+        //     Log::info("Invoice email sent to: " . $project->client->email);
+        // } catch (\Exception $e) {
+        //     // Log failure
+        //     Log::error("Failed to send invoice email: " . $e->getMessage());
+        // }
 
         return redirect()->route('show.project', ["project" => $project]);
     }

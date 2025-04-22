@@ -30,13 +30,9 @@ class InvoiceCreated extends Mailable
     {
 
         return new Envelope(
-            from: new Address('jeffrey@example.com', 'Jeffrey Way'),
-            subject: 'Order Shipped',
+            from: new Address(env('MAIL_FROM_ADDRESS', 'default@example.com'), env('MAIL_FROM_NAME', 'Default Name')),
+            subject: 'Invoice Issued',
         );
-
-        // return new Envelope(
-        //     subject: 'Invoice Created',
-        // );
     }
 
     /**
@@ -44,8 +40,18 @@ class InvoiceCreated extends Mailable
      */
     public function content(): Content
     {
+
+        $this->invoice->load('project.client');
+
         return new Content(
             view: 'emails.email',
+            with: [
+                'clientName' => $this->invoice->project->client->name,
+                'project_name' => $this->invoice->project_name,
+                'hourly_rate' => $this->invoice->project->rate_per_hour,
+                'total_hours' => $this->invoice->hours,
+                'total' => $this->invoice->total,
+            ]
         );
     }
 
