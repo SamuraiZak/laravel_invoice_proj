@@ -2,7 +2,7 @@
 
     <div class="flex flex-row items-center gap-x-4 bg-white p-6 rounded shadow max-w-4xl">
         <h2 class="text-lg font-extrabold text-gray-700">Monthly Income :</h2>
-        <p class="text-6xl font-semibold text-green-500">$ {{ $monthlyIncome }}</p>
+        <p class="text-6xl font-semibold text-green-500">$ {{ number_format($monthlyIncome, 2) }}</p>
     </div>
     <div class="container mx-auto px-4 py-8">
 
@@ -43,8 +43,6 @@
     <div class="flex justify-between mt-10">
         <h2>All Outstanding Invoices</h2>
 
-       
-
     </div>
 
     </div>
@@ -80,15 +78,16 @@
             <li>
                 <x-invoiceCard
                     :isPaid="$outStandingInvoice->isPaid"
+                    :hrefDownloadInvoice="route('invoice_download', $outStandingInvoice)"
                     :hrefMark="$outStandingInvoice->isPaid
                         ? route('markInvoiceAsUnpaid.dashboard', $outStandingInvoice)
                         : route('markInvoiceAsPaid.dashboard', $outStandingInvoice)"
                     :hrefDelete="route('deleteInvoice.dashboard', $outStandingInvoice)"
                 >
                     <div>
-                        <h3 class="text-green-700">${{ $outStandingInvoice->total }}</h3>
-                        <p>{{$outStandingInvoice->project->client->name}}</p>
-                        <p>{{$outStandingInvoice->project->client->company}}</p>
+                        <h3 class="text-green-700">${{ number_format($outStandingInvoice->total, 2)}}</h3>
+                        <p>{{ $outStandingInvoice->project->client->name }}</p>
+                        <p>{{ $outStandingInvoice->project->client->company }}</p>
                     </div>
                 </x-invoiceCard>
             </li>

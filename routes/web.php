@@ -10,8 +10,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvoiceController;
-
-
+use App\Http\Controllers\PdfController;
 
 // Tutorial routes
 Route::get('ninjas/', [NinjaController::class, 'index'])->name('ninjas.index');
@@ -83,6 +82,9 @@ Route::get('invoice/{invoice}/delete', [InvoiceController::class, 'delete'])->na
 Route::delete('invoice/{invoice}', [InvoiceController::class, 'destroy'])->name('destroy.invoice');
 Route::put('invoice/{invoice}/markAsPaid', [InvoiceController::class, 'markAsPaid'])->name('markAsPaid.invoice');
 Route::put('invoice/{invoice}/markAsUnpaid', [InvoiceController::class, 'markAsUnpaid'])->name('markAsUnpaid.invoice');
+
+
+Route::get('generate-pdf/{invoice}', [PdfController::class, 'generatePdf'])->name('invoice_download');
 
 //try out the modal
 Route::get('modal', function () {

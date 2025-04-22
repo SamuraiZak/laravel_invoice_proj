@@ -2,11 +2,10 @@
 
     <div class="flex flex-row items-center gap-x-4 bg-white p-6 rounded shadow max-w-4xl">
         <h2 class="text-lg font-extrabold text-gray-700">Monthly Income :</h2>
-        <p class="text-6xl font-semibold text-green-500">$ {{ $monthlyIncome }}</p>
+        <p class="text-6xl font-semibold text-green-500">$ {{ number_format($monthlyIncome, 2) }}</p>
     </div>
     <div class="container mx-auto px-4 py-8">
-
-        <div class="flex flex-row gap-x-12 justify-between">
+        <div class="flex flex-row gap-x-12 justify-between">    
 
             <a
             href="{{ route('show.dashboard') }}"

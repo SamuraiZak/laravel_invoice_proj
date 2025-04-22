@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
-    protected $fillable = ['project_id', 'total', 'isPaid'];
+    protected $fillable = ['project_id', 'total', 'isPaid', 'hours'];
 
     /** @use HasFactory<\Database\Factories\InvoiceFactory> */
     use HasFactory;

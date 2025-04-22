@@ -27,7 +27,7 @@ class InvoiceController extends Controller
 
         $validated = $request->validate(["hours" => "required|numeric|regex:/^\d+(\.\d{1,2})?$/"]);
 
-        $project->invoice()->create([$validated, "total" => $total]);
+        $project->invoice()->create(array_merge($validated,[ "total" => $total]));
 
         return redirect()->route('show.project', ["project" => $project]);
     }

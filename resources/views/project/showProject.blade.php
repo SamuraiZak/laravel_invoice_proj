@@ -249,13 +249,16 @@
             <li>
                 <x-invoiceCard
                     :isPaid="$invoice->isPaid"
+                    :hrefDownloadInvoice="route('invoice_download', $invoice)"
                     :hrefMark="$invoice->isPaid
                         ? route('markAsUnpaid.invoice', $invoice)
                         : route('markAsPaid.invoice', $invoice)"
                     :hrefDelete="route('delete.invoice', $invoice)"
                 >
                     <div>
-                        <h3 class="text-green-700">${{ $invoice->total }}</h3>
+                        <h3 class="text-green-700">${{ number_format($invoice->total, 2) }}</h3>
+                        <p>{{ $invoice->project->client->name }}</p>
+                        <p>{{ $invoice->project->client->company }}</p>
                     </div>
                 </x-invoiceCard>
             </li>

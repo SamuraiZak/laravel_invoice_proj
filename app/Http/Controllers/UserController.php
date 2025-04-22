@@ -137,9 +137,12 @@ class UserController extends Controller
         return view('freelancer.dashboardInvoices', ["outStandingInvoices" => $outStandingInvoices], compact('monthlyIncome', 'numberOfClients', 'projectCount', 'outstandingInvoiceCount'));
     }
 
+    // ===============================================================
     //duplicate routes from InvoiceController managing deleting, marking invoices
     //where instead of redirecting back to the project page, we redirect to dashboard
     //Times running short, dont want to research a more elegant way doing this
+
+    
     public function deleteInvoice(Invoice $invoice)
     {
         //Necessary Data to show on the dashboard
