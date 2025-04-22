@@ -18,13 +18,13 @@ Route::middleware('guest')->group(
         Route::post('/login', [AuthController::class, 'login'])->name('login');
         Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
         Route::post('/register', [AuthController::class, 'register'])->name('register');
-        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     }
 );
 
 Route::middleware('auth')->group(function () {
     // Insert routes here
 
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     //========= Dashboard
     Route::get('/dashboard', [UserController::class, 'index'])->name('show.dashboard');

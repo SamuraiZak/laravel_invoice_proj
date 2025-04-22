@@ -27,6 +27,7 @@
         <input
             type="password"
             name="password"
+            value="{{ old('password') }}"
             required
         >
 
@@ -34,6 +35,7 @@
         <input
             type="password"
             name="password_confirmation"
+            value="{{ old('password_confirmation') }}"
             required
         >
 
