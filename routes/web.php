@@ -12,24 +12,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PdfController;
 
-// Tutorial routes
-Route::get('ninjas/', [NinjaController::class, 'index'])->name('ninjas.index');
-Route::get('ninjas/create', [NinjaController::class, 'create'])->name('ninjas.create');
-Route::get('ninjas/{id}', [NinjaController::class, 'show'])->name('ninjas.show');
-Route::post('/ninjas', [NinjaController::class, 'store'])->name('ninjas.store');
-
-
-// ======   example wrapper for Auth Middleware
-
-
-//  to wrap routes and protect them from already logged in users, replace 'auth' middleware with 'guest', (already login why want to login again?)
-
-//auth stuff
 
 
 
 //Development routes
-Route::middleware('auth')->group(
+Route::middleware('guest')->group(
     function () {
         Route::get('/', [AuthController::class, 'showLogin'])->name('show.login');
         Route::post('/login', [AuthController::class, 'login'])->name('login');
