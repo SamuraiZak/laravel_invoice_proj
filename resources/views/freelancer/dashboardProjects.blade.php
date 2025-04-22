@@ -39,29 +39,26 @@
     </div>
 
     <div class="flex justify-between mt-10">
-        <h2>All Clients</h2>
-
-        <a
-            href="{{ route('create.client') }}"
-            class="bg-green-500 text-white px-4 pt-4 rounded hover:bg-blue-400 hover:text-black"
-        > Add New Client</a>
+        <h2>All Projects</h2>
 
     </div>
 
     </div>
 
     <ul>
-        @foreach ($clients as $client)
+        @foreach ($projects as $project)
             <li>
-                <x-card href="{{ route('show.client', $client->id) }}">
+                <x-card href="{{ route('show.project', $project->id) }}">
                     <div>
-                        <h3>{{ $client->name }}</h3>
-                        <p>{{ $client->company }}</p>
+                        <h3>{{ $project->name }}</h3>
+                        <p>{{ $project->client->name}}</p>
+                        <p>{{$project->client->company}}</p>
                     </div>
                 </x-card>
             </li>
         @endforeach
     </ul>
 
-    {{ $clients->links() }}
+    {{-- down here is related to paginating --}}
+    {{ $projects->links() }}
 </x-layout>

@@ -45,7 +45,15 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //========= Dashboard
 Route::get('/dashboard', [UserController::class, 'index'])->name('show.dashboard');
-Route::post('/client', [UserController::class, 'addClient'])->name('store.client');
+Route::get('/dashboard/projects', [UserController::class, 'indexProjects'])->name('show.dashboardProjects');
+Route::get('/dashboard/invoices', [UserController::class, 'indexInvoices'])->name('show.dashboardInvoices');
+
+//deleting invoice from dashboard
+Route::get('dashboard/{invoice}/delete', [UserController::class, 'deleteInvoice'])->name('deleteInvoice.dashboard');
+Route::delete('dashboard/{invoice}', [UserController::class, 'destroyInvoice'])->name('destroyInvoice.dashboard');
+//marking invoice as paid or unpaid from dashboard
+Route::put('dashboard/{invoice}/markAsPaid', [UserController::class, 'markAsPaid'])->name('markInvoiceAsPaid.dashboard');
+Route::put('dashboard/{invoice}/markAsUnpaid', [UserController::class, 'markAsUnpaid'])->name('markInvoiceAsUnpaid.dashboard');
 
 
 //========= Client
