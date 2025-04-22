@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ClientController extends Controller
 {
 
+    use AuthorizesRequests;
+
     //Show Client Detail
     public function showClient(Client $client)
     {
+
+        $this->authorize('view', $client);
+
         $client->load(['project' => function ($projQuery) {
             $projQuery->orderBy('created_at', 'desc');
         }]);

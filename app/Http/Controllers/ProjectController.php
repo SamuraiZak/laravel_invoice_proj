@@ -6,11 +6,17 @@ use App\Models\Client;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ProjectController extends Controller
 {
+    use AuthorizesRequests;
+
     public function showProject(Project $project)
     {
+
+        $this->authorize('view', $project);
+
         $project->load(['invoice' => function ($invoiceQuery) {
             $invoiceQuery->orderBy('created_at', 'desc');
         }]);
