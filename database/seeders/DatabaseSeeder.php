@@ -40,6 +40,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        $this->call([DojoSeeder::class, NinjaSeeder::class, UserSeeder::class, ClientSeeder::class, ProjectSeeder::class]);
+        $this->call([UserSeeder::class, ClientSeeder::class, ProjectSeeder::class]);
     }
 }

@@ -21,7 +21,6 @@
                     <h1>$tonks</h1>
                 </a>
 
-                {{-- <a href="{{ route('ninjas.index') }}">All Ninjas</a> --}}
                 <div class="flex items-center gap-4">
                     @guest
                         <a
@@ -38,7 +37,6 @@
                         <span class="border-r-2 pr-2">
                             Hi there, {{ Auth::user()->name }}
                         </span>
-                        <a href="{{ route('ninjas.create') }}">Create New Ninja</a>
 
                         <form
                             action="{{ route('logout') }}"

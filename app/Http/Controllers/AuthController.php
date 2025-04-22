@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('ninjas.index');
+        return redirect()->route('show.dashboard');
     }
 
     public function login(Request $request)

@@ -2,12 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NinjaController;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PdfController;
