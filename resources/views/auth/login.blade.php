@@ -1,6 +1,6 @@
 <x-layout>
     <form
-        action="{{ route('login') }}"
+        action="{{ route('store') }}"
         method="POST"
     >
         @csrf

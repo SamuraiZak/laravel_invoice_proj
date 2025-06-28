@@ -12,16 +12,16 @@ use App\Http\Controllers\PdfController;
 
 
 //Development routes
-Route::middleware('guest')->group(
+Route::middleware(['guest'])->group(
     function () {
-        Route::get('/', [AuthController::class, 'showLogin'])->name('show.login');
-        Route::post('/login', [AuthController::class, 'login'])->name('login');
+        Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+        Route::post('/login', [AuthController::class, 'login'])->name('store');
         Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
         Route::post('/register', [AuthController::class, 'register'])->name('register');
     }
 );
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     // Insert routes here
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

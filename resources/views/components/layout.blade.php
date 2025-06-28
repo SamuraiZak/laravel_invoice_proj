@@ -24,7 +24,7 @@
                 <div class="flex items-center gap-4">
                     @guest
                         <a
-                            href="{{ route('show.login') }}"
+                            href="{{ route('login') }}"
                             class="btn"
                         >Login</a>
                         <a
